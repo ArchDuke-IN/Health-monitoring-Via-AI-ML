@@ -2,8 +2,8 @@ name: Daily activity timestamp
 
 on:
   schedule:
-    # GitHub Actions uses UTC. This runs every day at 00:00 UTC.
-    - cron: "0 0 * * *"
+    # GitHub Actions uses UTC. This runs every 30 minutes.
+    - cron: "*/30 * * * *"
   workflow_dispatch:
 
 permissions:
