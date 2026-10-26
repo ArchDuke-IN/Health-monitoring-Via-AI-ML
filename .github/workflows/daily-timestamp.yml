@@ -1,0 +1,39 @@
+name: Daily activity timestamp
+
+on:
+  schedule:
+    # GitHub Actions uses UTC. This runs every day at 00:00 UTC.
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-timestamp
+  cancel-in-progress: false
+
+jobs:
+  update-timestamp:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update timestamp
+        run: |
+          date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last-activity.txt
+
+      - name: Commit timestamp
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/last-activity.txt
+          if git diff --cached --quiet; then
+            echo "Timestamp did not change; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: update daily activity timestamp"
+          git push origin HEAD:main
