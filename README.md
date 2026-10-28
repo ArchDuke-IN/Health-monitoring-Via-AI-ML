@@ -69,6 +69,7 @@ to use a different local webcam or stream before starting the application.
 
 ```text
 main.py                    Application loop and camera integration
+PROPOSAL.md                Technical proposal, methodology, formulas, and roadmap
 modules/calibration.py     Session baseline calibration
 modules/face_detect.py     Standalone face-mesh demo
 modules/face_guide.py      Face positioning guide
@@ -76,6 +77,10 @@ modules/heart_rate.py      rPPG heart-rate estimation
 modules/jaundice_anemia.py Color-based screening indicators
 modules/stress_fatigue.py  Eye and blink-based indicators
 ```
+
+For the detailed methodology, mathematical formulas, current progress,
+validation plan, and proposed ML extensions, see
+[`PROPOSAL.md`](PROPOSAL.md).
 
 ## Development
 
